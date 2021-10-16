@@ -1,0 +1,50 @@
+{% extends('base.html.twig') %}
+
+{% block title %}
+    Listado de Clientes!
+{% endblock %}
+
+{% block stylesheets %} {% endblock %}
+{% block body %} 
+     <h1 class="text-info">Hola Clientes</h1> 
+    <table class="table table-hover">
+        <thead class="sticky-top table-dark">
+            <tr>
+                <th>#</th>
+                <th>Número Cliente</th>
+                <th>Nombre</th>
+                <th>Nombre Contacto</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Representante Ventas</th>
+                <th>Límite de crédito</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cus in lista %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{cus.customernumber}}</td>
+                <td>{{cus.customername}}</td>
+                <td>{{cus.contactlastname}} {{cus.contactfirstname}}</td>
+                <td>{{cus.phone}}</td>
+                <td>
+                    {{cus.addressline1}} {{cus.addressline2}}, {{cus.city}}<br>
+                    {{cus.state}} {{cus.country}}, {{cus.postalcode}}
+                </td>
+                    {% if cus.salesrepemployeenumber == null %}
+                        <td>Sin asignar</td>
+                    {% else %}
+                        <td>{{cus.salesrepemployeenumber}}</td>
+                    {% endif %}
+                <td>{{cus.creditlimit}}</td>
+                <td>
+                <button type="button" class="btn btn-outline-info">Modificar</button>
+                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
